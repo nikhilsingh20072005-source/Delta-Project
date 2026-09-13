@@ -135,17 +135,123 @@ body {
     padding-right: 0;
 }
 
-/* .review-box {
-    border: 2px solid #ff4d4d;
-    border-radius: 15px;
-    padding: 25px;
-    margin-top: 20px;
-    background: #fff;
-    box-shadow: 0 4px 15px rgba(0,0, 0,0.08);
-} */
+
 
 #map {
     height: 400px;
     width: 100%;
     border-radius: 15px;
+}
+
+   #filters {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+   }
+
+   .filter {
+      text-align: center;
+      margin-right: 2rem;
+      margin-top: 2rem;
+      opacity: 0.7;
+   }
+
+   .filter:hover {
+      opacity: 1;
+      cursor: pointer;
+   }
+
+   .filter p {
+      font-size: 0.8rem;
+   }
+
+   .tax-info {
+      display: none;
+
+   }
+
+   .text-toggle {
+      border: 1px solid black;
+      border-radius: 1rem;
+      height: 3.25rem;
+      padding: 1rem;
+      margin-left: 2rem;
+      display: flex;
+      align-items: center;
+   }
+
+   .wishlist-form {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      z-index: 10;
+   }
+
+   .wishlist-btn {
+      width: 42px;
+      height: 42;
+      border-radius: 50%;
+      border: none;
+      background: white;
+      font-size: 24px;
+      cursor: pointer;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+   }
+
+   .wishlist-btn:hover {
+      transform: scale(1.1);
+   }
+
+   .card {
+    position: relative;
+}
+
+
+
+.search-form {
+  margin: 0;
+}
+
+.search-box {
+  display: flex;
+  align-items: center;
+  width: 420px;
+  height: 48px;
+  border: 1px solid #ddd;
+  border-radius: 30px;
+  background: white;
+  padding: 4px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+.search-inp {
+  flex: 1;
+  height: 100%;
+  border: none;
+  outline: none;
+  padding: 0 15px;
+  font-size: 15px;
+  background: transparent;
+}
+
+.search-inp::placeholder {
+  color: #777;
+}
+
+.search-btn {
+  height: 40px;
+  border: none;
+  border-radius: 25px;
+  background-color: #fe424d;
+  color: white;
+  padding: 0 18px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+}
+
+.search-btn:hover {
+  background-color: #e63946;
+  color: white;
 }
