@@ -10,12 +10,12 @@ dns.setServers(["8.8.8.8", "1.1.1.1"]);
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
+const MongoStore = require("connect-mongo");
 const path = require("path");
 const methodOverride = require("method-override");
 const ejsMate = require("ejs-mate");
 const ExpressError = require("./utils/ExpressError.js");
 const session = require("express-session");
-const MongoStore = require('connect-mongo');
 const flash = require("connect-flash");
 const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
@@ -25,6 +25,7 @@ const User = require("./models/user.js");
 const listingRouter = require("./routes/listing.js");
 const reviewsRouter = require("./routes/review.js");
 const usersRouter = require("./routes/user.js");
+const { env } = require("process");
 
 
 // const MONGO_URL = "mongodb://127.0.0.1:27017/wanderlust";
@@ -66,26 +67,27 @@ app.use(express.static(path.join(__dirname, "/public")));
 
 console.log("SECRET:", process.env.SECRET);
 
-const store = MongoStore.create({
-  mongoUrl: dbUrl,
-  crypto: {
-    secret: "mysupersecretcode",
-  },
-  touchAfter: 24 * 3600,
-});
 
-store.on("erroe", () => {
-  console.log("ERROR in MONGO SESSION STOE", err);
-})
+// const store = MongoStore.create({
+//   mongoUrl: process.env.ATLASDB_URL,
+//   crypto: {
+//     secret: process.env.SECRET,
+//   },
+//   touchAfter: 24 * 3600,
+// });
+
+// store.on("erroe", () => {
+//   console.log("ERROR in MONGO SESSION STOE", err);
+// })
 
 const sessionOptions = {
-  store,
+  // store,
   secret: process.env.SECRET,
   resave: false,
   saveUninitialized: true,
   cookie: {
     expires:  new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
-    maxAge: 7 * 24 * 60 * 1000,
+    maxAge: 7 * 24 * 60 * 60 * 1000,
     httpOnly: true,
   },
 };
