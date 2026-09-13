@@ -58,22 +58,6 @@ async function main() {
   await mongoose.connect(dbUrl);
 }
 
-
-
-app.get("/", (req, res) => {
-  res.redirect("/listings");
-});
-
-app.use("/listings", listingRouter);
-app.use("/listings/:id/reviews", reviewsRouter);
-app.use("/users", usersRouter);
-
-
-
-
-
-
-
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 app.use(express.urlencoded({ extended: true }));

@@ -81,8 +81,14 @@
           </button>
         </form>
       </div> -->
-      <% if (showSearch) { %>
-     <div class="navbar-nav mx-auto">
+
+
+      
+      
+      <% if (typeof showSearch !=="underfined" && showSearch) { %>
+     
+     
+        <div class="navbar-nav mx-auto">
   <form class=" align-items-center search-form d-flex " role="search" action="/listings" method="GET">
     
     <div class="search-box">
