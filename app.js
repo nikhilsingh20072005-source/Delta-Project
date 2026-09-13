@@ -10,7 +10,7 @@ dns.setServers(["8.8.8.8", "1.1.1.1"]);
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
-const MongoStore = require("connect-mongo");
+const MongoStore = require("connect-mongo").default;
 const path = require("path");
 const methodOverride = require("method-override");
 const ejsMate = require("ejs-mate");
@@ -58,6 +58,22 @@ async function main() {
   await mongoose.connect(dbUrl);
 }
 
+
+
+app.get("/", (req, res) => {
+  res.redirect("/listings");
+});
+
+app.use("/listings", listingRouter);
+app.use("/listings/:id/reviews", reviewsRouter);
+app.use("/users", usersRouter);
+
+
+
+
+
+
+
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 app.use(express.urlencoded({ extended: true }));
@@ -65,7 +81,15 @@ app.use(methodOverride("_method"));
 app.engine('ejs', ejsMate);
 app.use(express.static(path.join(__dirname, "/public")));
 
-console.log("SECRET:", process.env.SECRET);
+// console.log("SECRET:", process.env.SECRET);
+
+const store = MongoStore.create({
+    mongoUrl: process.env.ATLASDB_URL,
+    crypto: {
+        secret: process.env.SECRET,
+    },
+    touchAfter: 24 * 3600,
+});
 
 
 // const store = MongoStore.create({
@@ -76,9 +100,9 @@ console.log("SECRET:", process.env.SECRET);
 //   touchAfter: 24 * 3600,
 // });
 
-// store.on("erroe", () => {
-//   console.log("ERROR in MONGO SESSION STOE", err);
-// })
+store.on("erroe", (err) => {
+  console.log("ERROR in MONGO SESSION STORE", err);
+});
 
 const sessionOptions = {
   // store,
